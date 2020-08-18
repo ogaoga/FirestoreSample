@@ -115,7 +115,9 @@
 				AF246D13F65DB1EC794E9F11 /* Pods */,
 				366924B9274440918DFEB7D8 /* Frameworks */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		6381DBB424EBD9BF003C99B1 /* Products */ = {
 			isa = PBXGroup;
