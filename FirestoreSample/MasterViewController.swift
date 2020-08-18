@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class MasterViewController: UITableViewController {
 
   var detailViewController: DetailViewController? = nil
   var objects = [Any]()
 
-
+  let db = Firestore.firestore()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
@@ -34,11 +36,19 @@ class MasterViewController: UITableViewController {
 
   @objc
   func insertNewObject(_ sender: Any) {
-    objects.insert(NSDate(), at: 0)
-    let indexPath = IndexPath(row: 0, section: 0)
-    tableView.insertRows(at: [indexPath], with: .automatic)
+    var ref: DocumentReference? = nil
+    ref = db.collection("tasks").addDocument(data: [
+      "date": Date(),
+      "completed": false
+    ]) { err in
+      if let err = err {
+        print("Error adding document: \(err)")
+      } else {
+        print("Document added with ID: \(ref!.documentID)")
+      }
+    }
   }
-
+  
   // MARK: - Segues
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
